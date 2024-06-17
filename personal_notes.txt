@@ -1,0 +1,1 @@
+- why use bun: Bun acts as a package manager focused on saving disk space and boosting installation speed. 
