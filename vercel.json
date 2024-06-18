@@ -1,0 +1,21 @@
+{
+    "builds": [
+        {
+            "src": "server/app.ts",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/server/app.ts"
+        }
+    ],
+    "installCommand": "bun install",
+    "buildCommand": "bun run build",
+    "engines": {
+    "node": "20.x"
+  }
+
+   
+}
