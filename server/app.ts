@@ -35,13 +35,15 @@ app.use('*', logger());
 app.route("/api/expenses", expensesHono);
 
 import { Glob } from "bun";
-
-const glob = new Glob("*/*");
-
-for (const file of glob.scanSync(".")) {
-    console.log(file);
-}
-
+function logDirectoryStructure() {
+    const glob = new Glob("**/*", { dot: true }); // Recursively match all files and directories
+    for (const file of glob.scanSync(".")) {
+      console.log(file);
+    }
+  }
+  
+  // Log the directory structure at the start
+  logDirectoryStructure();
 
 app.use('/*', async (c, next) => {
   const requestedPath = c.req.path;
