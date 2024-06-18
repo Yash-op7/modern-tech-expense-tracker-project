@@ -8,9 +8,10 @@ const app = new Hono();
 
 app.use('*', logger());
 
-app.route("/api/expenses", expensesHono)
+const apiRoutes = app.basePath("/api").route("/expenses", expensesHono)
 
 app.get('/*', serveStatic({ root: './frontend/dist' }))
 app.get('/*', serveStatic({ root: './frontend/dist/index.html' }))
 
 export default app;
+export type ApiRoutes = typeof apiRoutes

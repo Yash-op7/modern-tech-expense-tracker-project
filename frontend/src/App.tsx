@@ -1,6 +1,7 @@
 
-import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
+
+import {api} from "@/lib/api"
 
 import {
   Card,
@@ -17,7 +18,8 @@ function App() {
 
   useEffect(() => {
     async function fetchTotal() {
-      const res = await fetch("/api/expenses/total-spent")
+      // const res = await fetch("/api/expenses/total-spent)
+      const res = await  api.expenses["total-spent"].$get()     // ! now the data has the expected type and the overall code is more integrated 
       const data = await res.json()
       setTotalSpent(data.total)
     }
