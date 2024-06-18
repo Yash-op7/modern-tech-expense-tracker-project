@@ -24,13 +24,25 @@ import { serveStatic } from 'hono/bun';
 import fs from 'fs';
 import path from 'path';
 
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+
 const app = new Hono();
 
 app.use('*', logger());
 
+
 app.route("/api/expenses", expensesHono);
 
-// Middleware to log attempts to serve static files
+import { Glob } from "bun";
+
+const glob = new Glob("*/*");
+
+for (const file of glob.scanSync(".")) {
+    console.log(file);
+}
+
+
 app.use('/*', async (c, next) => {
   const requestedPath = c.req.path;
   const absolutePath = path.resolve('./frontend/dist', requestedPath);
@@ -63,3 +75,4 @@ app.get('/*', async (c) => {
 });
 
 export default app;
+
