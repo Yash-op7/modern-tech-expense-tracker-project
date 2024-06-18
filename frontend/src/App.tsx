@@ -34,7 +34,7 @@ function App() {
           <p>{totalSpent}</p>
         </CardContent>
         <CardFooter>
-          <p>Card Footer</p>
+          <p>END</p>
         </CardFooter>
       </Card>
   )
