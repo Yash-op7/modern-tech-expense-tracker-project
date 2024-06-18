@@ -34,7 +34,7 @@ export const expensesHono = new Hono()              // the api defined on the ro
 })
 .get("/total-spent", c => {
     const total =  fakeExpenses.reduce((acc, expense) => acc + expense.amount, 0);
-    return c.json({total});
+    return c.json({total}); 
 })
 .get("/:id{[0-9]+}", c => {                 // ! fetches a particular expense by id, expecting any integer in the url to be directed to this route, thats why the regex is used
     const id = Number.parseInt(c.req.param("id"));

@@ -8,7 +8,11 @@ const app = new Hono();
 
 app.use('*', logger());
 
-
+app.get('/', (c) => {
+    return c.json({
+        message: "home page"
+    })
+})
 
 app.route("/api/expenses", expensesHono)
 
