@@ -62,7 +62,7 @@ function Expenses() {
             <TableCell className="font-medium">{expense.id}</TableCell> 
             <TableCell>{expense.title}</TableCell>
             <TableCell>{expense.amount}</TableCell>
-kk          </TableRow>)
+          </TableRow>)
         }
       </TableBody>
     </Table>

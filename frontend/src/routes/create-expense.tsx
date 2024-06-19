@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
 import { useForm } from '@tanstack/react-form'
-import type { FieldApi } from '@tanstack/react-form'
+import { api } from '@/lib/api'
 
 export const Route = createFileRoute("/create-expense")({
   component: CreateExpense,
@@ -17,7 +17,12 @@ function CreateExpense() {
       amount: 0
     },
     onSubmit: async ({ value }) => {
+      // do something with the form data like send it to the db
       console.log(value)
+      const res = await api.expenses.$post({json: value});  // saying that it is json that we are passing to the server which is the correct type that it is expecting (in the backend)
+      if(!res.ok)  {
+        throw new Error("server error")
+      }
     }
   })
 
