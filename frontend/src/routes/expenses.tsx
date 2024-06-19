@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { api } from '@/lib/api'
-
 import { Skeleton } from "@/components/ui/skeleton"
 import {
   Table,

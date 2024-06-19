@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button'
 
 import { useForm } from '@tanstack/react-form'
 import { api } from '@/lib/api'
+import { useNavigate } from '@tanstack/react-router'
 
 export const Route = createFileRoute("/create-expense")({
   component: CreateExpense,
 })
 
 function CreateExpense() {
+  const navigate = useNavigate()
   const form = useForm({
     defaultValues: {
       title: '',
@@ -23,7 +25,8 @@ function CreateExpense() {
       if(!res.ok)  {
         throw new Error("server error")
       }
-    }
+      navigate({to: "/expenses"})
+    } 
   })
 
   return (<div className="p-2">
