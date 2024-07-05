@@ -1,13 +1,17 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { type QueryClient } from '@tanstack/react-query';
+interface MyRouterContext {
+  queryClient:  QueryClient
+}
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: Root,
 });
 
 function NavBar() {
   return (
-    <div className = "p-2 flex gap-2" >
+    <div className = "p-2 flex gap-2 max-w-2xl m-auto" >
     <Link to="/" className="[&.active]:font-bold">
       Home
     </Link>{ ' ' }
@@ -15,7 +19,7 @@ function NavBar() {
     About
   </Link>
   <Link to="/expenses" className="[&.active]:font-bold">
-    Expenses
+    Expenses 
   </Link>
   <Link to="/create-expense" className="[&.active]:font-bold">
     Create Expense
@@ -33,7 +37,9 @@ function Root() {
     <>
     <NavBar/>
       <hr />
+    <div className = "p-2 flex gap-2 max-w-2xl m-auto" >
       <Outlet />
+    </div>
   {/* <TanStackRouterDevtools />  */ }
     </>
   );

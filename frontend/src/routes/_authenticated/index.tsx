@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query"
 import { api } from "@/lib/api"
 
 // routes
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/_authenticated/')({
   component: Index,
 })
 
