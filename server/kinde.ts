@@ -76,6 +76,7 @@ type Env = {
   };
 };
 
+// the logic below is same as /me endpoint
 export const getUser = createMiddleware<Env>(async (c, next) => {
   try {
     const manager = sessionManager(c);
