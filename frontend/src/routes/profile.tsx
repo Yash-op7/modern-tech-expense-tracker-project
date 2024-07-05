@@ -2,11 +2,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import { api } from "@/lib/api"
 import { useQuery } from '@tanstack/react-query'
 
-export const Route = createFileRoute ('/about')({
+export const Route = createFileRoute ('/profile')({
   component: Profile,
 })
-
-
 
 async function getCurrentUser() {
   const res = await api.me.$get()
@@ -17,12 +15,19 @@ async function getCurrentUser() {
   return data
 }
 
-function Index() {
+function Profile() {
   const { isPending, error, data } = useQuery({
     queryKey: ['get-current-user'],
     queryFn: getCurrentUser
   });
 
-function Profile() {
-  return <div className="p-2">Hello from Profile!</div>
+  if(isPending) return "loading";  
+  if(error) return "not logged in";
+
+  return (
+    <div className='p-2'>
+      Hello from Profile!
+      <p>Hello {data.user.family_name}</p>
+    </div>
+  )
 }
