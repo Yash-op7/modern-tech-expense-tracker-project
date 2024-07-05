@@ -3,8 +3,6 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from 'zod'
 
 // type 
-
-
 const expenseSchema = z.object({
     id: z.number().int().positive().min(1),
     title: z.string().min(3).max(100),
@@ -25,10 +23,9 @@ export const expensesHono = new Hono()              // the api defined on the ro
 .get("/", async (c) => {                            // ! gets all expenses
     return c.json({ expenses: fakeExpenses })
 })
-.post("/", zValidator("json", createPostSchema), async (c) => {         // add zvalidator as middleware to validate the input to have the correct schema 
+.post("/", zValidator("json", createPostSchema), async (c) => {         // add zod alidator as middleware to validate the input to have the correct schema 
     const expense = await c.req.valid("json")
     fakeExpenses.push({...expense, id:fakeExpenses.length + 1})         // ! adds a new expense to our db
-    // const expense = createPostSchema.parse(data)
     c.status(201)
     return c.json(expense)
 })
