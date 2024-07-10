@@ -1,3 +1,5 @@
 - why use bun: Bun acts as a package manager focused on saving disk space and boosting installation speed. 
 
 to make routes authenticated using tanstack Router, in the frontend/src/routes any route which starts with '_' is not a page it is a wrapper around any page that starts with that '_'ed route, example if we want to make route x authenticate we just put it inside _authenticated.tsx wrapper
+
+ 

@@ -3,6 +3,10 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from 'zod'
 import { getUser } from "../kinde";
 
+import { db } from "../db";
+import { expenses as expenseTable } from "../db/schema/expenses";
+import { eq } from "drizzle-orm";
+
 // type 
 const expenseSchema = z.object({
     id: z.number().int().positive().min(1),
@@ -24,13 +28,22 @@ export const expensesHono = new Hono()              // the api defined on the ro
 .get("/", getUser, async (c) => {                            // ! gets all expenses
     const user = c.var.user;
     
+    const expenses = await db.select().from(expenseTable).where(eq(expenseTable.userId, user.id))
+
     return c.json({ expenses: fakeExpenses })
 })
 .post("/", getUser, zValidator("json", createPostSchema), async (c) => {         // add zod alidator as middleware to validate the input to have the correct schema 
+    const user = c.var.user;
     const expense = await c.req.valid("json")
-    fakeExpenses.push({...expense, id:fakeExpenses.length + 1})         // ! adds a new expense to our db
+
+    const result = db.insert(expenseTable).values({
+        ...expense,
+        userId: user.id
+    }).returning()
+
+    // fakeExpenses.push({...expense, id:fakeExpenses.length + 1})         // ! adds a new expense to our db
     c.status(201)
-    return c.json(expense)
+    return c.json(result)
 })
 .get("/total-spent", getUser, c => {
     const total =  fakeExpenses.reduce((acc, expense) => acc + expense.amount, 0);
