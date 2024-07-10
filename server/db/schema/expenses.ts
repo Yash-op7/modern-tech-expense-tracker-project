@@ -3,7 +3,7 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { z } from "zod";
 
 export const expenses = pgTable(        // great thing about drizlle is the we are defining the current structure of teh table, we dont have to do CREATE table or ALTER table later on like in SQL, we can just modify this expenses object to become the new state of the db and then you can apply a migration and it will always be whatever we have specified right here and we also get a lot of Typescript safety wiht doing things like this
-  "expenses",
+  "expenses",                           // ONCE YOU SETUP THE DB USING NEON PG, THE DB EXISTS BUT THIS TABLE NEEDS TO MIGRATED INTO THAT DB
   {
     id: serial("id").primaryKey(),      // serial is an auto incrementing integer which works well as a primary key
     userId: text("user_id").notNull(),      // in postgres userId will be user_id

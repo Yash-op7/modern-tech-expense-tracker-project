@@ -17,6 +17,7 @@
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
     "@kinde-oss/kinde-typescript-sdk": "^2.9.1",
+    "@tanstack/zod-form-adapter": "^0.26.3",
     "drizzle-orm": "^0.31.4",
     "drizzle-zod": "^0.5.1",
     "hono": "^4.4.6",
