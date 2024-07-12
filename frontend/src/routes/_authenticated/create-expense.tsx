@@ -24,7 +24,7 @@ function CreateExpense() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const form = useForm({
-    validatorAdapter: zodValidator,
+    // validatorAdapter: zodValidator,
     defaultValues: {
       title: "",
       amount: "0",
@@ -68,7 +68,7 @@ function CreateExpense() {
   return (
     <div className="p-2">
       <h2>Create Expense</h2>
-      <form.Provider>
+      {/* <form.Provider> */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -79,9 +79,9 @@ function CreateExpense() {
         >
           <form.Field
             name="title"
-            validators={{
-              onChange: createExpenseSchema.shape.title,
-            }}
+            // validators={{
+            //   onChange: createExpenseSchema.shape.title,
+            // }}
             children={(field) => (
               <div>
                 <Label htmlFor={field.name}>Title</Label>
@@ -101,9 +101,9 @@ function CreateExpense() {
 
           <form.Field
             name="amount"
-            validators={{
-              onChange: createExpenseSchema.shape.amount,
-            }}
+            // validators={{
+            //   onChange: createExpenseSchema.shape.amount,
+            // }}
             children={(field) => (
               <div>
                 <Label htmlFor={field.name}>Amount</Label>
@@ -124,9 +124,9 @@ function CreateExpense() {
 
           <form.Field
             name="date"
-            validators={{
-              onChange: createExpenseSchema.shape.date,
-            }}
+            // validators={{
+            //   onChange: createExpenseSchema.shape.date,
+            // }}
             children={(field) => (
               <div className="self-center">
                 <Calendar
@@ -153,7 +153,7 @@ function CreateExpense() {
             )}
           />
         </form>
-      </form.Provider>
+      {/* </form.Provider> */}
     </div>
   );
 }
