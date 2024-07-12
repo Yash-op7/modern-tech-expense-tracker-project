@@ -11,9 +11,7 @@ import {
   loadingCreateExpenseQueryOptions,
 } from "@/lib/api";
 import { useQueryClient } from "@tanstack/react-query";
-
 import { zodValidator } from "@tanstack/zod-form-adapter";
-
 import { createExpenseSchema } from "@server/sharedTypes";
 
 export const Route = createFileRoute("/_authenticated/create-expense")({
@@ -24,7 +22,7 @@ function CreateExpense() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const form = useForm({
-    validator: zodValidator(createExpenseSchema),
+    validatorAdapter: zodValidator,
     defaultValues: {
       title: "",
       amount: "0",
@@ -68,6 +66,7 @@ function CreateExpense() {
   return (
     <div className="p-2">
       <h2>Create Expense</h2>
+      <form.Provider>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -152,6 +151,7 @@ function CreateExpense() {
             )}
           />
         </form>
+      </form.Provider>
     </div>
   );
 }

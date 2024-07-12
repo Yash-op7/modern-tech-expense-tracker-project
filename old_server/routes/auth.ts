@@ -3,6 +3,8 @@ import { Hono } from "hono";
 import { kindeClient, sessionManager } from "../kinde";
 import { getUser } from "../kinde"
 
+// all the routes that deals with loggin in, registering are here
+
 export const authRoute = new Hono()
   .get("/login", async (c) => {
     const loginUrl = await kindeClient.login(sessionManager(c));
@@ -13,8 +15,8 @@ export const authRoute = new Hono()
     return c.redirect(registerUrl.toString());
   })
   .get("/callback", async (c) => {
-    // get called eveyr time we login or register
-    const url = new URL(c.req.url);
+    // this is what kinde will call once its done loggin in or registering a user, it will redirect the uesr to / route
+    const url = new URL(c.req.url);   // get the context, for extracting url and session manager
     await kindeClient.handleRedirectToApp(sessionManager(c), url);
     return c.redirect("/");
   })
