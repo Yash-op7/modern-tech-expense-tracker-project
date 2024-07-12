@@ -24,7 +24,7 @@ function CreateExpense() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const form = useForm({
-    validator: zodValidator(createExpenseSchema),
+    validatorAdapter: zodValidator,
     defaultValues: {
       title: "",
       amount: "0",
@@ -68,6 +68,7 @@ function CreateExpense() {
   return (
     <div className="p-2">
       <h2>Create Expense</h2>
+      <form.Provider>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -152,6 +153,7 @@ function CreateExpense() {
             )}
           />
         </form>
+      </form.Provider>
     </div>
   );
 }
